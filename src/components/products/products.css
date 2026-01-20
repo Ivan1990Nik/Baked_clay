@@ -1,0 +1,137 @@
+/* ====== SECTION ====== */
+
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: #000;
+  width: 44px;
+  height: 44px;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* ====== СКРЫВАЕМ СТРЕЛКИ НА МОБИЛКЕ (по желанию) ====== */
+
+@media (max-width: 600px) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    display: none;
+  }
+}
+
+.products {
+    padding: 80px 16px;
+    background-image: url("/images/imgMainProduct.jpg");
+}
+
+/* ====== КОНТЕЙНЕР ====== */
+
+.products__container {
+    
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ====== ЗАГОЛОВОК ====== */
+
+.products__title {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 40px;
+}
+
+/* ====== СЛАЙДЕР-ОБЁРТКА (КЛЮЧ!) ====== */
+
+.products__slider {
+  max-width: 560px;
+  margin: 0 auto;
+  overflow: hidden; /* 🔥 ОБЯЗАТЕЛЬНО */
+}
+
+/* ====== SWIPER FIX ====== */
+
+.swiper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.swiper-wrapper {
+  align-items: stretch;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+}
+
+/* ====== КАРТОЧКА ====== */
+
+.product-card {
+  width: 100%;
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* ====== ИЗОБРАЖЕНИЕ ====== */
+
+.product-card img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  display: block;
+}
+
+/* ====== КНОПКА ====== */
+
+.products__btn {
+  display: block;
+  margin: 50px auto 0;
+  padding: 14px 36px;
+  font-size: 16px;
+  border-radius: 30px;
+  border: none;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.products__btn:hover {
+  background: #333;
+}
+
+/* ====== АДАПТАЦИЯ ====== */
+
+@media (max-width: 768px) {
+  .products__title {
+    font-size: 26px;
+  }
+
+  .products__slider {
+    max-width: 430px;
+    height: 250px;
+  }
+
+  .product-card img {
+    height: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .products__slider {
+    max-width: 300px;
+    
+  }
+
+  .product-card img {
+    height: 250px;
+  }
+}
+/* ====== СТРЕЛКИ ====== */
+

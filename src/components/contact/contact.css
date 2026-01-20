@@ -1,0 +1,75 @@
+.contact {
+  background-image: url("/images/imgFooter.jpg");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  color: #fff;
+}
+
+.contact__overlay {
+
+  padding: 80px 16px 40px;
+}
+
+.contact__container {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contact__title {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.contact__info p {
+  font-size: 18px;
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+
+.contact__items {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 60px;
+}
+
+.contact__items a {
+  color: #fff;
+  font-size: 18px;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.contact__items a:hover {
+  opacity: 0.8;
+}
+
+/* нижняя часть */
+.contact__bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  padding-top: 20px;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* ===== АДАПТАЦИЯ ===== */
+
+@media (max-width: 768px) {
+  .contact__overlay {
+    padding: 60px 12px 30px;
+  }
+
+  .contact__title {
+    font-size: 28px;
+  }
+
+  .contact__info p {
+    font-size: 16px;
+  }
+
+  .contact__items a {
+    font-size: 16px;
+  }
+}
