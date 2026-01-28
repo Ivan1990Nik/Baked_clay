@@ -23,10 +23,10 @@ function Reviews() {
   ];
 
   return (
-    <section className="reviews">
+    <section id="reviews" className="reviews">
       <div className="reviews__overlay">
         <div className="reviews__container">
-          <h2 className="reviews__title">Отзывы</h2>
+          <h2 className="reviews__title">Отзывы </h2>
 
           <div className="reviews__list">
             {reviews.map((review, index) => (

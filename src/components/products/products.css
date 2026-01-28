@@ -1,30 +1,9 @@
-/* ====== SECTION ====== */
 
 
-.swiper-button-next,
-.swiper-button-prev {
-  color: #000;
-  width: 44px;
-  height: 44px;
-}
 
-.swiper-button-next::after,
-.swiper-button-prev::after {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-/* ====== СКРЫВАЕМ СТРЕЛКИ НА МОБИЛКЕ (по желанию) ====== */
-
-@media (max-width: 600px) {
-  .swiper-button-next,
-  .swiper-button-prev {
-    display: none;
-  }
-}
 
 .products {
-    padding: 80px 16px;
+    padding: 20px 16px;
     background-image: url("/images/imgMainProduct.jpg");
 }
 
@@ -42,6 +21,7 @@
   text-align: center;
   font-size: 32px;
   margin-bottom: 40px;
+  color: #522919;;
 }
 
 /* ====== СЛАЙДЕР-ОБЁРТКА (КЛЮЧ!) ====== */
@@ -49,7 +29,7 @@
 .products__slider {
   max-width: 560px;
   margin: 0 auto;
-  overflow: hidden; /* 🔥 ОБЯЗАТЕЛЬНО */
+  
 }
 
 /* ====== SWIPER FIX ====== */
@@ -77,6 +57,10 @@
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
+  .product-card:hover img {
+  transform: scale(1.05);
+}
+
 
 /* ====== ИЗОБРАЖЕНИЕ ====== */
 
@@ -85,22 +69,34 @@
   height: 420px;
   object-fit: cover;
   display: block;
+    transition: transform 0.5s ease;
 }
 
 /* ====== КНОПКА ====== */
 
 .products__btn {
   display: block;
-  margin: 50px auto 0;
+  margin: 20px auto 0;
   padding: 14px 36px;
   font-size: 16px;
   border-radius: 30px;
   border: none;
-  background: #000;
+  background: #522919;
   color: #fff;
   cursor: pointer;
   transition: 0.3s;
 }
+.swiper-pagination {
+  position: relative;
+  
+
+}
+.swiper-pagination-bullet {
+  border-radius: 10px;
+  height: 3px;
+  width: 40px;
+} 
+
 
 .products__btn:hover {
   background: #333;
@@ -114,7 +110,7 @@
   }
 
   .products__slider {
-    max-width: 430px;
+    max-width: 450px;
     height: 250px;
   }
 
@@ -123,15 +119,18 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 500px) {
   .products__slider {
-    max-width: 300px;
-    
+    max-width: 360px;
+    height: 260px;
   }
 
   .product-card img {
     height: 250px;
+    
   }
+
+  
 }
 /* ====== СТРЕЛКИ ====== */
 

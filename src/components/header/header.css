@@ -3,40 +3,58 @@
   width: 100%;
   height: 100vh;
   background: url("/images/imgMainTop.jpg") center / cover no-repeat;
+
 }
 
 /* ===== CONTAINER ===== */
 .header__container {
-  background: url("/images/imgHeaderTop.jpg") center / cover no-repeat;
+position: fixed;
+z-index: 1000;
   max-width: 1200px;
   margin: 0 ;
-  padding: 20px;
+  padding: 5px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
+ 
+
 }
 
 /* ===== LOGO ===== */
 .header__logo {
+  margin-top: 10px;
   font-size: 22px;
   font-weight: 600;
   color: #fff;
+margin-left: 15px;
 }
 
+
 .header__logo span {
-  color: #f2c9ac;
+  color: #703409;
 }
 
 /* ===== NAV DESKTOP ===== */
 .nav {
   display: flex;
-  gap: 24px;
+  gap: 34px;
+  margin-right: 10px;
+}
+.burger--open {
+  z-index: 10000;
 }
 
 .nav a {
-  color: #fff;
+  margin-left: 30px;
+  color: #522919;
   text-decoration: none;
   font-size: 16px;
+}
+.nav a:hover {
+  color: #24bbc0b4;
+  text-decoration: none;
+  font-size: 16px;
+  transition: all 0.3s;
 }
 
 /* ===== BURGER ===== */
@@ -52,7 +70,7 @@
 .burger span {
   height: 3px;
   width: 100%;
-  background: #fff;
+  background: #1eb2df;
   transition: 0.3s;
 }
 
@@ -64,10 +82,11 @@
     position: fixed;
     z-index: 1000;
     top: 0;
-    right: -100%;
-    width: 70%;
+    right: -110%;
+    width: 100%;
+    
     height: 100vh;
-    background: #0000005b;
+    background: #0000002a;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -76,13 +95,23 @@
   }
 
   .nav--open {
-    right: 0;
+    right: -10px;
+    /* top: 0; */
   }
 
   .burger {
-    display: flex;
-  }
+  display: flex;
+  position: fixed;
+ 
+  right: 20px;
+  z-index: 1001; /* выше меню, но ниже модальных окон */
+  transition: transform 0.3s ease-out;
+}
 
+/* При скролле вниз — скрываем бургер */
+.burger--hidden {
+  transform: translateY(-100%);
+}
   /* анимация бургера */
   .burger--open span:nth-child(1) {
     transform: rotate(45deg) translate(6px, 6px);

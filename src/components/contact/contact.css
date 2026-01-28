@@ -1,9 +1,9 @@
 .contact {
-  background-image: url("/images/imgFooter.jpg");
+  background-image: url("/images/imgFooter2.jpg");
   background-size: cover;
   background-position: center;
   position: relative;
-  color: #fff;
+ color: #522919; 
 }
 
 .contact__overlay {
@@ -36,7 +36,7 @@
 }
 
 .contact__items a {
-  color: #fff;
+  color: #5e46e4b7;
   font-size: 18px;
   text-decoration: none;
   transition: opacity 0.3s ease;
