@@ -99,6 +99,7 @@ function ProductList() {
 
   // 🔥 КЛЮЧЕВОЙ ЭФФЕКТ: Привязка свайпов — с правильными настройками
   useEffect(() => {
+    
     const modal = modalContentRef.current;
     if (!modal) return;
 
