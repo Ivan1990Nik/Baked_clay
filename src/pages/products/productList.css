@@ -119,9 +119,7 @@
   transition: transform 0.5s ease;
 }
 
-.product-list__card:hover .product-list__card-image img {
-  transform: scale(1.05);
-}
+
 
 .product-list__card-content {
   padding: 1.5rem;
@@ -164,48 +162,8 @@
 }
 
 
-/* ===== Модальное окно увеличения ===== */
 
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.9);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  
-  backdrop-filter: blur(5px);
-}
 
-.modal-content {
-  position: relative;
-  max-width: 90vw;
-  max-height: 90vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.modal-close {
-    z-index: 1000;
-  position: absolute;
-  top: -20px;
-  right: 0px;
-  font-size: 4rem;
-  color: white;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  line-height: 1;
-  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  transition: color 0.3s ease;
-}
 
 .modal-close:hover {
   color: #ff6b6b;
@@ -214,17 +172,111 @@
 
 .modal-image {
   max-width: 100%;
+  max-height: 900px;
   object-fit: contain;
   border-radius: 8px;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
   transition: transform 0.4s ease;
 }
 
-.modal-image:hover {
-  transform: scale(1.02);
+
+
+
+
+/* productList.css */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+
+  overflow: auto;
 }
 
-/* Адаптивность для мобильных */
-@media (max-width: 480px) {
- 
+.modal-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 32px;
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  z-index: 10;
+    padding: 0;
+  line-height: 1;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  transition: color 0.3s ease;
+}
+
+/* .modal-image {
+  max-width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+  margin: 10px 0;
+  border-radius: 8px;
+} */
+
+.modal-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.8);
+  border: none;
+  font-size: 24px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  z-index: 10;
+  transition: background 0.2s;
+}
+
+
+
+.modal-nav-btn--prev {
+  left: 10px;
+}
+
+.modal-nav-btn--next {
+  right: 10px;
+}
+
+.modal-nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.modal-indicator {
+  position: absolute;
+  bottom: 15px;
+  color: white;
+  font-size: 16px;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 4px 10px;
+  border-radius: 20px;
 }
