@@ -1,23 +1,68 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Data } from "../../data/DataBase";
 import "./productList.css";
 import { useNavigate } from "react-router-dom";
-
-
 
 function ProductList() {
   const navigate = useNavigate();
   const [selectedProject, setSelectedProject] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
+  const modalContentRef = useRef(null);
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+
+  const MIN_SWIPE_DISTANCE = 40; // Уменьшено для лучшей отзывчивости
+
+  const isSwipe = () => {
+    if (!touchStart || !touchEnd) return false;
+    const distanceX = touchStart.x - touchEnd.x;
+    const distanceY = touchStart.y - touchEnd.y;
+    // Горизонтальный свайп + минимальное вертикальное смещение
+    return Math.abs(distanceX) > MIN_SWIPE_DISTANCE && Math.abs(distanceY) < 30;
+  };
+
+  const handleSwipe = () => {
+    if (!isSwipe()) return;
+
+    const distanceX = touchStart.x - touchEnd.x;
+
+    if (distanceX > 0) {
+      nextImage(); // Смахнули влево → следующее
+    } else {
+      prevImage(); // Смахнули вправо → предыдущее
+    }
+  };
+
+  const handleTouchStart = (e) => {
+    setTouchStart({
+      x: e.touches[0].clientX,
+      y: e.touches[0].clientY,
+    });
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEnd({
+      x: e.touches[0].clientX,
+      y: e.touches[0].clientY,
+    });
+  };
+
+  const handleTouchEnd = () => {
+    handleSwipe();
+    setTouchStart(null);
+    setTouchEnd(null);
+  };
+
   const handleImageClick = (project) => {
     setSelectedProject(project);
-    setCurrentImageIndex(0); // Сбрасываем на первое фото
+    setCurrentImageIndex(0);
   };
 
   const closeModal = () => {
     setSelectedProject(null);
     setCurrentImageIndex(0);
+    document.body.classList.remove("modal-open");
   };
 
   const nextImage = () => {
@@ -41,7 +86,7 @@ function ProductList() {
     return () => window.removeEventListener("keydown", handleEsc);
   }, []);
 
-  // Навигация стрелками клавиатуры
+  // Навигация стрелками
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (!selectedProject) return;
@@ -52,15 +97,41 @@ function ProductList() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [selectedProject, currentImageIndex]);
 
+  // 🔥 КЛЮЧЕВОЙ ЭФФЕКТ: Привязка свайпов — с правильными настройками
+  useEffect(() => {
+    const modal = modalContentRef.current;
+    if (!modal) return;
+
+    // Добавляем слушатели с `passive: true` — это критично для мобильных браузеров
+    modal.addEventListener("touchstart", handleTouchStart, { passive: true });
+    modal.addEventListener("touchmove", handleTouchMove, { passive: true });
+    modal.addEventListener("touchend", handleTouchEnd, { passive: true });
+
+    return () => {
+      modal.removeEventListener("touchstart", handleTouchStart);
+      modal.removeEventListener("touchmove", handleTouchMove);
+      modal.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, [touchStart, touchEnd]);
+
+  // Запрет прокрутки страницы
+  useEffect(() => {
+    if (selectedProject) {
+      document.body.classList.add("modal-open");
+    } else {
+      document.body.classList.remove("modal-open");
+    }
+  }, [selectedProject]);
+
   return (
     <>
       <section className="product-list">
         <button
-className="product-list__back-btn"
-onClick={() => navigate(-1)}
->
-← Назад
-</button>
+          className="product-list__back-btn"
+          onClick={() => navigate(-1)}
+        >
+          ← Назад
+        </button>
         <div className="product-list__container">
           <h1>Все мои работы</h1>
           <div className="product-list__grid">
@@ -71,7 +142,7 @@ onClick={() => navigate(-1)}
                 onClick={() => handleImageClick(item)}
               >
                 <div className="product-list__card-image">
-                  <img src={item.images[0]} alt={item.name} /> {/* Показываем первое фото */}
+                  <img src={item.images[0]} alt={item.name} />
                 </div>
                 <div className="product-list__card-content">
                   <h3 className="product-list__card-title">{item.name}</h3>
@@ -86,7 +157,12 @@ onClick={() => navigate(-1)}
       {/* Модальное окно галереи */}
       {selectedProject && (
         <div className="modal-overlay" onClick={closeModal}>
-          <div className="modal-content">
+          <div
+            className="modal-content"
+            ref={modalContentRef}
+            onClick={(e) => e.stopPropagation()}
+            style={{ cursor: "pointer" }} // 🔴 КРИТИЧНО ДЛЯ iOS
+          >
             <button className="modal-close" onClick={closeModal}>
               ×
             </button>
@@ -106,7 +182,7 @@ onClick={() => navigate(-1)}
               src={selectedProject.images[currentImageIndex]}
               alt={`${selectedProject.name} - фото ${currentImageIndex + 1}`}
               className="modal-image"
-              onClick={(e) => e.stopPropagation()} // Не закрывать при клике на фото
+              onClick={(e) => e.stopPropagation()}
             />
 
             <button
