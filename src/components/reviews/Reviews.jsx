@@ -1,5 +1,5 @@
 
-// src/components/reviews/Reviews.jsx
+import ctic from "../../../public/images/stic.png"
 import "./reviews.css";
 
 function Reviews() {
@@ -26,8 +26,7 @@ function Reviews() {
     <section id="reviews" className="reviews">
       <div className="reviews__overlay">
         <div className="reviews__container">
-          <h2 className="reviews__title">Отзывы </h2>
-
+          <img src={ctic} alt="" className="reviews__title"/>
           <div className="reviews__list">
             {reviews.map((review, index) => (
               <div

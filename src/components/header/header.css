@@ -1,9 +1,6 @@
 /* ===== HEADER ===== */
 .header {
   width: 100%;
-  height: 100vh;
-  background: url("/images/imgMainTop.jpg") center / cover no-repeat;
-
 }
 
 /* ===== CONTAINER ===== */
@@ -20,7 +17,18 @@ z-index: 1000;
  
   
 }
+.header__main {
+  display: flex;
+ padding-top: 100px;
+ max-width: 750px;
+      
 
+}
+.header__main_img{
+        
+        
+
+}
 /* ===== LOGO ===== */
 .header__logo {
   margin-top: 10px;
@@ -38,24 +46,25 @@ margin-left: 15px;
 /* ===== NAV DESKTOP ===== */
 .nav {
   display: flex;
-  gap: 34px;
+  gap: 14px;
   margin-right: 10px;
-
+margin-left: 280px;
 }
 .burger--open {
   z-index: 10000;
 }
 
 .nav a {
-  margin-left: 50px;
+
   color: #522919;
   text-decoration: none;
   font-size: 16px;
 }
 .nav a:hover {
-  color: #24bbc0b4;
+  color: #333;
   text-decoration: none;
   font-size: 16px;
+  scale: 1.1;
   transition: all 0.3s;
 }
 
@@ -98,7 +107,11 @@ margin-left: 15px;
   .nav a{
  color:#1eb2df;;
   }
+.header__main_img{
+        
+        height: 300px;
 
+}
   .nav--open {
     right: -10px;
     /* top: 0; */

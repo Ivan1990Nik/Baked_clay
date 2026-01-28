@@ -1,7 +1,5 @@
 .reviews {
- background-image: url("/images/imgMainFooter.PNG"); /* своя картинка */
-   background-size: cover;
-  background-position: center;
+
 
 }
 
@@ -15,14 +13,17 @@
   margin: 0 auto;
 }
 
-.reviews__title {
-  text-align: center;
-  font-size: 36px;
-  color: #522919;
-  margin-bottom: 60px;
 
-  
+.reviews__title {
+
+  max-width: 100%;        
+  height: auto;          
+  display: block;         
+  margin: 0 auto;         
 }
+
+
+
 
 /* список отзывов */
 .reviews__list {

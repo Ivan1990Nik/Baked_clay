@@ -1,10 +1,12 @@
 .about {
 
-  background-image: url("/images/imgMainAbout.jpg");
+  background-image: url("/images/imgMainAbout2.jpg");
+  background-size: cover;
+  background-position: center;
+  position: relative;
 
-  background-position: center bottom; /* ← ВАЖНО: сдвигаем вверх */
 
-  height: 1050px;
+ /*  height: 1050px; */
 }
 
 .about__overlay {
@@ -20,7 +22,7 @@
   max-width: 700px;
   padding: 0px 24px;
   color: #522919;
-  margin-bottom: 650px;
+  margin-bottom: 950px;
 }
 
 .about__content h2 {
