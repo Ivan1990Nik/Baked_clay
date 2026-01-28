@@ -8,11 +8,7 @@ export const Data = [
         name: 'women',
         images: [
             getImage("carusel", "face.png"),
-            getImage("carusel", "bear.jpg"),
-            getImage("carusel", "bear.jpg"),
-            getImage("carusel", "bear.jpg"),
-            getImage("carusel", "bear.jpg"),
-            getImage("carusel", "bear.jpg"),
+            
         ]
     },
     {
@@ -20,8 +16,6 @@ export const Data = [
         price: 3800,
         name: 'women',
         images: [
-            getImage("carusel", "face.png"),
-            getImage("carusel", "bear.jpg"),
             getImage("carusel", "bear.jpg"),
         ]
     },
@@ -30,9 +24,7 @@ export const Data = [
         price: 3800,
         name: 'women',
         images: [
-            getImage("carusel", "face.png"),
-            getImage("carusel", "bear.jpg"),
-            getImage("carusel", "bear.jpg"),
+            getImage("carusel", "unicorn.png"),
         ]
     },
     {
@@ -40,9 +32,39 @@ export const Data = [
         price: 3800,
         name: 'women',
         images: [
-            getImage("carusel", "face.png"),
-            getImage("carusel", "bear.jpg"),
-            getImage("carusel", "bear.jpg"),
+            getImage("carusel", "love.png"),
+        ]
+    },
+    {
+        id: 5,
+        price: 3800,
+        name: 'women',
+        images: [
+            getImage("carusel", "flora.png"),
+        ]
+    },
+    {
+        id: 6,
+        price: 3800,
+        name: 'women',
+        images: [
+            getImage("product", "gus.png"),
+        ]
+    },
+    {
+        id: 7,
+        price: 3800,
+        name: 'women',
+        images: [
+            getImage("product", "unicons.png"),
+        ]
+    },
+    {
+        id: 8,
+        price: 3800,
+        name: 'women',
+        images: [
+            getImage("product", "pink_lucky.png"),
         ]
     },
    

@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom"; // ✅ Импортируем us
 
 const imageFiles = [
   "flora.png",
-  "face.png",
+  "unicorn.png",
   "face.png",
   "bear.jpg",
   "love.png",
