@@ -19,8 +19,9 @@ z-index: 1000;
 }
 .header__main {
   display: flex;
- padding-top: 100px;
+ padding: 100px 25px 0 ;
  max-width: 750px;
+ margin: 0px 10px;
       
 
 }

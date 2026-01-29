@@ -55,7 +55,11 @@
 }
 
 /* ===== АДАПТАЦИЯ ===== */
-
+.contact__bottom--broDev {
+display: flex;
+align-items: center;
+justify-content: center;
+}
 @media (max-width: 768px) {
   .contact__overlay {
     padding: 60px 12px 30px;

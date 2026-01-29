@@ -23,15 +23,14 @@ function Contact() {
 
           <div className="contact__bottom">
             <p>© 2026 Авторская лепка на кружках</p>
-            <p>
+            <p className="contact__bottom--broDev" >
               Сайт разработал{" "}
-              <a
+              <a 
                 href="https://ivan1990nik.github.io/portfolio/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
               <img src={bro} alt="" style={{width: 100}}/>
-                {/* Бро.dev */}
               </a>
             </p>
           </div>
