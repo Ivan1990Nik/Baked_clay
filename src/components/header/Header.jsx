@@ -2,7 +2,7 @@
 import { useState } from "react";
 import "./header.css";
 
-import logo from "../../../public/images/logo2.png"
+import logo from "../../../public/images/logo3.png"
 import sticHeader from "../../../public/images/stic-header.png"
 
 export default function Header() {
@@ -14,7 +14,7 @@ export default function Header() {
       <div className="header__container">
 
         <div className="header__logo">
-          <img src={logo} alt="" style={{ width: 178, height: 60 }} />
+          <img src={logo} alt="" style={{ width: 230, height: 70 }} />
         </div>
 
         <nav className={`nav ${isOpen ? "nav--open" : ""}`}>
