@@ -75,5 +75,13 @@ export const Data = [
             getImage("product", "ej.png"),
         ]
     },
+    {
+        id: 10,
+        price: 3800,
+        name: 'lamb',
+        images: [
+            getImage("product", "lamb.png"),
+        ]
+    },
    
 ]

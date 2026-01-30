@@ -2,7 +2,6 @@
 
 .product-list {
   padding: 4rem 2rem;
-  background-color: #f9f9f9;
   min-height: 100vh;
   width: 800px;
  
@@ -87,15 +86,17 @@
 
 /* Стиль карточки */
 .product-list__card {
-  background: white;
+  position: relative;
+  background: rgba(255, 255, 255, 0.137);
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.397);
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   width: 100%;
   max-width: 320px;
   text-align: center;
   cursor: default;
+  height: 300px;
 }
 
 .product-list__card:hover {
@@ -104,7 +105,7 @@
 }
 
 .product-list__card-image {
-  height: 220px;
+  height: 300px;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -122,7 +123,12 @@
 
 
 .product-list__card-content {
-  padding: 1.5rem;
+padding: 3px;
+position: absolute;
+bottom: 0;
+  left: 0;           /* 🔴 Прижимаем к левому краю */
+  right: 0;   
+background-color: #dddddd8f;
 }
 
 .product-list__card-title {
