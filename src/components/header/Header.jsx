@@ -33,9 +33,10 @@ export default function Header() {
         </div>
       </div>
       <div className="header__main">
+        
         <img src={sticHeader} alt="" className="header__main_img"/>
 <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo rem recusandae suscipit dolorum consequatur amet 
-  voluptatem error ipsum sequi velit necessitatibus ipsa cum est, ducimus sint autem debitis! Accusantium, hic.</p>
+  v</p>
       </div>
     </header>
   );

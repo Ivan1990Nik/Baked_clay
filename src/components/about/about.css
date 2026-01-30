@@ -23,6 +23,9 @@
   color: #522919;
   margin-bottom: 950px;
 }
+.about__content img{
+ width: 500px;
+}
 
 .about__content h2 {
   font-size: 42px;
@@ -50,6 +53,9 @@
     text-align: center;
   }
 
+  .about__content img{
+ width: 300px;
+}
   .about__content h2 {
     font-size: 32px;
   }

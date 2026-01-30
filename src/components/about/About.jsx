@@ -1,12 +1,14 @@
 // src/components/about/About.jsx
 import "./about.css";
+import velcome from "../../../public/images/velcome.png"
+
 
 function About() {
   return (
     <section id="about" className="about">
       <div className="about__overlay">
         <div className="about__content">
-          <h2>Давайте знакомиться 🌸</h2>
+          <img src={velcome} alt="" /* style={{width: 500}} *//>
 
           <p>
             Меня зовут <strong>Яна</strong>.
