@@ -25,6 +25,8 @@
 }
 .about__content img{
  width: 500px;
+     border-top: 1px solid #522919;
+     margin-top: 10px;
 }
 
 .about__content h2 {

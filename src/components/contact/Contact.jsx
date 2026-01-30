@@ -1,5 +1,6 @@
 import bro from "../../assets/logo.PNG"
 import "./contact.css";
+import contact from "../../../public/images/contact.png"
 
 function Contact() {
   return (
@@ -8,7 +9,7 @@ function Contact() {
         <div className="contact__container">
 
           <div className="contact__info">
-            <h2 className="contact__title">Контакты</h2>
+            <img src={contact} alt="" className="contact__title"/>
             <p>
               Если хотите заказать кружку или задать вопрос — напишите мне 💌
             </p>

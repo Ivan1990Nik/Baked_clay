@@ -8,6 +8,7 @@ import "./products.css";
 
 import { getImage } from "../../utils/getImage";
 import { useNavigate } from "react-router-dom"; // ✅ Импортируем useNavigate
+import work from "../../../public/images/work.png"
 
 const imageFiles = [
   "flora.png",
@@ -25,7 +26,7 @@ function Products() {
   return (
     <section id="products" className="products">
       <div className="products__container">
-        <h2 className="products__title">Мои работы</h2>
+        <img src={work} alt="" className="products__title" />
 
         <div className="products__slider">
           <Swiper

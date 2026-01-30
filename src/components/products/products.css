@@ -19,8 +19,9 @@
 .products__title {
   text-align: center;
   font-size: 32px;
-  margin-bottom: 40px;
+width: 600px;
   color: #522919;;
+      border-top: 1px solid #522919;
 }
 
 /* ====== СЛАЙДЕР-ОБЁРТКА (КЛЮЧ!) ====== */
@@ -107,6 +108,7 @@
 @media (max-width: 768px) {
   .products__title {
     font-size: 26px;
+    width: 450px;
   }
 
   .products__slider {
@@ -127,6 +129,10 @@
 
   .product-card img {
     height: 250px;
+  }
+  .products__title {
+
+    width: 350px;
   }
 
 }
