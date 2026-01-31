@@ -5,15 +5,15 @@ import Contact from './components/contact/Contact'
 import Header from './components/header/Header'
 import Products from './components/products/Products'
 import Reviews from './components/reviews/Reviews'
+import Layout from './components/layout/Layout.jsx';
 
-import Product from './pages/products/productList'
+import ProductList from './pages/products/productList'
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={
         <>
-        
           <Header />
           <About />
           <Products />
@@ -21,9 +21,8 @@ function App() {
           <Contact />
         </>
       } />
-
-      {/* Отдельная страница с деталями работы — только детали! */}
-      <Route path="/product" element={<Product />} />
+      <Layout />
+      <Route path="/product" element={<ProductList />} />
     </Routes>
   )
 }
