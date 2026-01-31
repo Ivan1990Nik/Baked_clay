@@ -95,8 +95,8 @@ const handleTouchMove = (e) => {
       if (e.key === "ArrowRight") nextImage();
       if (e.key === "ArrowLeft") prevImage();
     };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyDown);
+    return () => window.removeEventListener("keyup", handleKeyDown);
   }, [selectedProject, currentImageIndex]);
 
   // 🔥 КЛЮЧЕВОЙ ЭФФЕКТ: Привязка свайпов — с правильными настройками
