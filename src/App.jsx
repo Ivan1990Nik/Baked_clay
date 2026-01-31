@@ -14,6 +14,7 @@ function App() {
     <Routes>
       <Route path="/" element={
         <>
+          <Layout />
           <Header />
           <About />
           <Products />
@@ -21,7 +22,6 @@ function App() {
           <Contact />
         </>
       } />
-      <Layout />
       <Route path="/product" element={<ProductList />} />
     </Routes>
   )
