@@ -73,13 +73,26 @@ function ProductList() {
     });
   };
 
-  const handleTouchMove = (e) => {
-    e.preventDefault(); // 🔥 КРИТИЧНО ДЛЯ iOS
-    setTouchEnd({
-      x: e.touches[0].clientX,
-      y: e.touches[0].clientY,
-    });
-  };
+ const handleTouchMove = (e) => {
+  e.preventDefault(); // 🔥 КРИТИЧНО ДЛЯ iOS
+  setTouchEnd({
+    x: e.touches[0].clientX,
+    y: e.touches[0].clientY,
+  });
+
+  // ✅ Визуальный эффект: "тянем" модалку вниз
+  const modal = modalContentRef.current;
+  if (modal && touchStart && touchEnd) {
+    const deltaY = touchEnd.y - touchStart.y;
+    if (deltaY > 0 && deltaY < 200) { // только при свайпе вниз, не слишком далеко
+      modal.style.transform = `translateY(${deltaY * 0.6}px)`; // 60% от движения пальца
+      modal.style.opacity = `${1 - deltaY / 400}`; // плавное прозрачное исчезновение
+    } else {
+      modal.style.transform = "none";
+      modal.style.opacity = "1";
+    }
+  }
+};
 
 const handleTouchEnd = (e) => {
   if (!touchStart) return;
