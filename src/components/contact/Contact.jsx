@@ -1,6 +1,6 @@
 import bro from "../../assets/logo.PNG"
 import "./contact.css";
-import contact from "../../../public/images/contact.png"
+import contact from "/images/contact.png"
 
 function Contact() {
   return (

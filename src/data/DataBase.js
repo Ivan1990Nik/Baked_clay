@@ -8,6 +8,7 @@ export const Data = [
         name: 'women',
         images: [
             getImage("carusel", "face.png"),
+            getImage("carusel", "face.png"),
             
         ]
     },

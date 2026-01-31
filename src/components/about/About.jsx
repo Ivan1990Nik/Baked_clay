@@ -1,6 +1,6 @@
 // src/components/about/About.jsx
 import "./about.css";
-import velcome from "../../../public/images/velcome.png"
+import velcome from "/images/velcome.png"
 
 
 function About() {

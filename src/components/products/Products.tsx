@@ -8,7 +8,7 @@ import "./products.css";
 
 import { getImage } from "../../utils/getImage";
 import { useNavigate } from "react-router-dom"; // ✅ Импортируем useNavigate
-import work from "../../../public/images/work.png"
+import work from "/images/work.png"
 
 const imageFiles = [
   "flora.png",

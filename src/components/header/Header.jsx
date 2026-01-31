@@ -3,7 +3,7 @@ import { useState } from "react";
 import "./header.css";
 
 import logo from "../../../public/images/logo3.png"
-import sticHeader from "../../../public/images/stic-header.png"
+import sticHeader from "/images/stic-header.png"
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);

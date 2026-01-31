@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { Data } from "../../data/DataBase";
 import "./productList.css";
 import { useNavigate } from "react-router-dom";
+import work from "/images/work.png"
 
 function ProductList() {
   const navigate = useNavigate();
@@ -134,7 +135,7 @@ function ProductList() {
           ← Назад
         </button>
         <div className="product-list__container">
-          <h1>Все мои работы</h1>
+          <img src={work} alt="work" />
           <div className="product-list__grid">
             {Data.map((item) => (
               <div

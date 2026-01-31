@@ -33,6 +33,10 @@
   text-align: center;
 }
 
+ .product-list__container img {
+    width: 450px;
+  }
+
 .product-list__container h1 {
   font-size: 2.5rem;
   color: #333;
@@ -74,8 +78,8 @@
     padding: 3rem 1rem;
   }
 
-  .product-list__container h1 {
-    font-size: 1.8rem;
+  .product-list__container img {
+    width: 350px;
   }
 
   .product-list__back-btn {
@@ -96,7 +100,7 @@
   max-width: 320px;
   text-align: center;
   cursor: default;
-  height: 300px;
+  height: 400px;
 }
 
 .product-list__card:hover {
@@ -105,7 +109,7 @@
 }
 
 .product-list__card-image {
-  height: 300px;
+  height: 400px;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -129,6 +133,37 @@ bottom: 0;
   left: 0;           /* 🔴 Прижимаем к левому краю */
   right: 0;   
 background-color: #dddddd8f;
+
+}
+.product-list__card:hover .product-list__card-content {
+  background: linear-gradient(
+    90deg,
+    #e6b2b285,  /* Розово-оранжевый */
+    #bd969657,  /* Мятный */
+    #c5dfe671,  /* Голубой */
+    #f5c7c773,  /* Светло-зелёный */
+    #9963637e   /* Жёлтый */
+  );
+  background-size: 500% 100%;
+  color: white;
+  font-weight: 600;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  animation: gradientShift 4s ease infinite;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Анимация плавного сдвига градиента */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .product-list__card-title {
@@ -241,7 +276,9 @@ height: 25px;
   transition: background 0.2s;
 }
 
-
+.modal-open {
+  overflow: hidden;
+}
 
 .modal-nav-btn--prev {
   left: 10px;
