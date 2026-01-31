@@ -119,23 +119,30 @@ const handleTouchMove = (e) => {
     });
   };
 
-  const handleTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
+const handleTouchEnd = () => {
+  if (!touchStart || !touchEnd) return;
 
-    const distanceX = touchStart.x - touchEnd.x;
-    const distanceY = touchStart.y - touchEnd.y;
+  const distanceY = touchStart.y - touchEnd.y;
+  const distanceX = touchStart.x - touchEnd.x;
 
-    if (Math.abs(distanceX) > 30 && Math.abs(distanceY) < 50) {
-      if (distanceX > 0) {
-        nextImage();
-      } else {
-        prevImage();
-      }
+  // Закрыть по свайпу вниз, если свайп вертикальный и сильный
+  if (distanceY > 100 && Math.abs(distanceX) < 50) {
+    closeModal();
+    return;
+  }
+
+  // Горизонтальный свайп — переключение
+  if (Math.abs(distanceX) > 30 && Math.abs(distanceY) < 50) {
+    if (distanceX > 0) {
+      nextImage();
+    } else {
+      prevImage();
     }
+  }
 
-    setTouchStart(null);
-    setTouchEnd(null);
-  };
+  setTouchStart(null);
+  setTouchEnd(null);
+};
 
   modal.addEventListener("touchstart", handleTouchStart, { passive: false });
   modal.addEventListener("touchmove", handleTouchMove, { passive: false });
