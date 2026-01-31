@@ -109,6 +109,7 @@ const handleTouchMove = (e) => {
       x: e.touches[0].clientX,
       y: e.touches[0].clientY,
     });
+    setTouchEnd(null); // сбрасываем предыдущий
   };
 
   const handleTouchMove = (e) => {
@@ -119,50 +120,51 @@ const handleTouchMove = (e) => {
     });
   };
 
-const handleTouchEnd = () => {
-  if (!touchStart || !touchEnd) return;
+  const handleTouchEnd = (e) => {
+    if (!touchStart) return;
 
-  const distanceY = touchStart.y - touchEnd.y;
-  const distanceX = touchStart.x - touchEnd.x;
+    const end = touchEnd || {
+      x: e?.changedTouches?.[0]?.clientX || touchStart.x,
+      y: e?.changedTouches?.[0]?.clientY || touchStart.y,
+    };
 
-  // Закрыть по свайпу вниз, если свайп вертикальный и сильный
-  if (distanceY > 100 && Math.abs(distanceX) < 50) {
-    closeModal();
-    return;
-  }
+    const distanceX = touchStart.x - end.x;
+    const distanceY = touchStart.y - end.y;
 
-  // Горизонтальный свайп — переключение
-  if (Math.abs(distanceX) > 30 && Math.abs(distanceY) < 50) {
-    if (distanceX > 0) {
-      nextImage();
-    } else {
-      prevImage();
+    // Закрыть по свайпу вниз
+    if (distanceY > 100 && Math.abs(distanceX) < 50) {
+      closeModal();
+      setTouchStart(null);
+      setTouchEnd(null);
+      return;
     }
-  }
 
-  setTouchStart(null);
-  setTouchEnd(null);
-};
+    // Переключить изображение при горизонтальном свайпе
+    if (Math.abs(distanceX) > 30 && Math.abs(distanceY) < 50) {
+      if (distanceX > 0) {
+        nextImage();
+      } else {
+        prevImage();
+      }
+    }
 
+    setTouchStart(null);
+    setTouchEnd(null);
+  };
+
+  // 🔥 Добавляем touchcancel — это СПАСАЕТ iOS
   modal.addEventListener("touchstart", handleTouchStart, { passive: false });
   modal.addEventListener("touchmove", handleTouchMove, { passive: false });
   modal.addEventListener("touchend", handleTouchEnd, { passive: false });
+  modal.addEventListener("touchcancel", handleTouchEnd, { passive: false }); // ✅ ВАЖНО!
 
   return () => {
     modal.removeEventListener("touchstart", handleTouchStart);
     modal.removeEventListener("touchmove", handleTouchMove);
     modal.removeEventListener("touchend", handleTouchEnd);
+    modal.removeEventListener("touchcancel", handleTouchEnd);
   };
-}, [touchStart, touchEnd, nextImage, prevImage]);
-
-  // Запрет прокрутки страницы
-  useEffect(() => {
-    if (selectedProject) {
-      document.body.classList.add("modal-open");
-    } else {
-      document.body.classList.remove("modal-open");
-    }
-  }, [selectedProject]);
+}, [touchStart, touchEnd, nextImage, prevImage, closeModal]);
 
   return (
     <>
