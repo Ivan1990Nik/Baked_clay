@@ -42,12 +42,13 @@ function ProductList() {
     });
   };
 
-  const handleTouchMove = (e) => {
-    setTouchEnd({
-      x: e.touches[0].clientX,
-      y: e.touches[0].clientY,
-    });
-  };
+const handleTouchMove = (e) => {
+  e.preventDefault(); // 🔥 КЛЮЧЕВОЕ ДЛЯ IPHONE — запрещаем скролл страницы и перехват жеста
+  setTouchEnd({
+    x: e.touches[0].clientX,
+    y: e.touches[0].clientY,
+  });
+};
 
   const handleTouchEnd = () => {
     handleSwipe();
@@ -100,21 +101,52 @@ function ProductList() {
 
   // 🔥 КЛЮЧЕВОЙ ЭФФЕКТ: Привязка свайпов — с правильными настройками
   useEffect(() => {
-    
-    const modal = modalContentRef.current;
-    if (!modal) return;
+  const modal = modalContentRef.current;
+  if (!modal) return;
 
-    // Добавляем слушатели с `passive: true` — это критично для мобильных браузеров
-    modal.addEventListener("touchstart", handleTouchStart, { passive: true });
-    modal.addEventListener("touchmove", handleTouchMove, { passive: true });
-    modal.addEventListener("touchend", handleTouchEnd, { passive: true });
+  const handleTouchStart = (e) => {
+    setTouchStart({
+      x: e.touches[0].clientX,
+      y: e.touches[0].clientY,
+    });
+  };
 
-    return () => {
-      modal.removeEventListener("touchstart", handleTouchStart);
-      modal.removeEventListener("touchmove", handleTouchMove);
-      modal.removeEventListener("touchend", handleTouchEnd);
-    };
-  }, [touchStart, touchEnd]);
+  const handleTouchMove = (e) => {
+    e.preventDefault(); // 🔥 КРИТИЧНО ДЛЯ iOS
+    setTouchEnd({
+      x: e.touches[0].clientX,
+      y: e.touches[0].clientY,
+    });
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+
+    const distanceX = touchStart.x - touchEnd.x;
+    const distanceY = touchStart.y - touchEnd.y;
+
+    if (Math.abs(distanceX) > 30 && Math.abs(distanceY) < 50) {
+      if (distanceX > 0) {
+        nextImage();
+      } else {
+        prevImage();
+      }
+    }
+
+    setTouchStart(null);
+    setTouchEnd(null);
+  };
+
+  modal.addEventListener("touchstart", handleTouchStart, { passive: false });
+  modal.addEventListener("touchmove", handleTouchMove, { passive: false });
+  modal.addEventListener("touchend", handleTouchEnd, { passive: false });
+
+  return () => {
+    modal.removeEventListener("touchstart", handleTouchStart);
+    modal.removeEventListener("touchmove", handleTouchMove);
+    modal.removeEventListener("touchend", handleTouchEnd);
+  };
+}, [touchStart, touchEnd, nextImage, prevImage]);
 
   // Запрет прокрутки страницы
   useEffect(() => {
@@ -163,7 +195,7 @@ function ProductList() {
             className="modal-content"
             ref={modalContentRef}
             onClick={(e) => e.stopPropagation()}
-            style={{ cursor: "pointer" }} // 🔴 КРИТИЧНО ДЛЯ iOS
+           /*  style={{ cursor: "pointer" }} // 🔴 КРИТИЧНО ДЛЯ iOS */
           >
             <button className="modal-close" onClick={closeModal}>
               ×
