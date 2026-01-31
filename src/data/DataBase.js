@@ -89,10 +89,15 @@ export const Data = [
         price: 3800,
         name: 'lamb',
         images: [
-            getImage("product", "giraffe1.png"),
-            getImage("product", "giraffe2.PNG"),
-            getImage("product", "giraffe.PNG"),
-            getImage("product", "giraffe3.PNG"),
+            getImage("product", "giraffe.png"),
+        ]
+    },
+    {
+        id: 12,
+        price: 3800,
+        name: 'lamb',
+        images: [
+            getImage("product", "loves.png"),
         ]
     },
    
