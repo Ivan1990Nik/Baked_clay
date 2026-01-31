@@ -3,7 +3,8 @@ import { useState } from "react";
 import "./header.css";
 
 import logo from "/images/logo3.png"
-import logo4 from "/images/logo4.png"
+import log from "/images/log.PNG"
+
 import sticHeader from "/images/stic-header.png"
 
 export default function Header() {
@@ -36,7 +37,7 @@ export default function Header() {
       <div className="header__main">
         <img src={sticHeader} alt="logo" className="header__main__img"  />
         <div className="header__main__item">
-          <img src={logo4} alt=""  />
+          <img src={log} alt="logos"  />
           <p className="header__main__title" >«Здесь глина превращается в настроение, а кружки — в маленькие истории»</p>
         </div>
       </div>
