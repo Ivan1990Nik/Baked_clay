@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { Data } from "../../data/DataBase";
 import "./productList.css";
 import { useNavigate } from "react-router-dom";
-import work from "/images/work.png"; // ✅ ИСПРАВЛЕНО: /images/ — папка public
+import work from "/images/work.png";
 
 function ProductList() {
   const navigate = useNavigate();
@@ -11,13 +11,11 @@ function ProductList() {
 
   const modalContentRef = useRef(null);
 
-  // Для свайпов
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
 
   const MIN_SWIPE_DISTANCE = 40;
 
-  // Проверка: был ли свайп?
   const isSwipe = () => {
     if (!touchStart || !touchEnd) return false;
     const distanceX = touchStart.x - touchEnd.x;
@@ -25,47 +23,38 @@ function ProductList() {
     return Math.abs(distanceX) > MIN_SWIPE_DISTANCE && Math.abs(distanceY) < 30;
   };
 
-  // Обработка свайпа
   const handleSwipe = () => {
     if (!isSwipe()) return;
 
     const distanceX = touchStart.x - touchEnd.x;
-
-    if (distanceX > 0) {
-      nextImage(); // Смахнули влево → следующее
-    } else {
-      prevImage(); // Смахнули вправо → предыдущее
-    }
+    if (distanceX > 0) nextImage();
+    else prevImage();
   };
 
-  // Следующее изображение
   const nextImage = () => {
     if (currentImageIndex < selectedProject.images.length - 1) {
-      setCurrentImageIndex(currentImageIndex + 1);
+      setCurrentImageIndex((prev) => prev + 1);
     }
   };
 
-  // Предыдущее изображение
   const prevImage = () => {
     if (currentImageIndex > 0) {
-      setCurrentImageIndex(currentImageIndex - 1);
+      setCurrentImageIndex((prev) => prev - 1);
     }
   };
 
-  // Открыть модалку
   const handleImageClick = (project) => {
     setSelectedProject(project);
     setCurrentImageIndex(0);
   };
 
-  // Закрыть модалку
   const closeModal = () => {
     setSelectedProject(null);
     setCurrentImageIndex(0);
     document.body.classList.remove("modal-open");
   };
 
-  // Закрытие по ESC
+  // ESC закрытие
   useEffect(() => {
     const handleEsc = (e) => {
       if (e.key === "Escape") closeModal();
@@ -74,7 +63,7 @@ function ProductList() {
     return () => window.removeEventListener("keydown", handleEsc);
   }, []);
 
-  // Навигация стрелками клавиатуры
+  // Стрелки клавиатуры
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (!selectedProject) return;
@@ -85,24 +74,19 @@ function ProductList() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [selectedProject, currentImageIndex]);
 
-  // 🔥 КЛЮЧЕВОЙ: Навешивание свайпов на модалку (только один раз!)
+  // 🔥 КЛЮЧЕВОЙ ИСПРАВЛЕНИЕ: УБИРАЕМ ПОПЫТКУ ПОДВЕСИТЬ СВАЙП НА .modal-content
+  // Вместо этого — ВЕСЬ .modal-overlay ЛОВИТ СВАЙПЫ, а .modal-content — просто отображается
+  // И НАСТРОЙКА cursor: pointer — на самом .modal-overlay, а не на .modal-content!
   useEffect(() => {
-    const modal = modalContentRef.current;
-    if (!modal) return;
+    const modalOverlay = document.querySelector(".modal-overlay");
+    if (!modalOverlay) return;
 
-    // Определяем обработчики внутри useEffect — чтобы они не менялись
     const handleTouchStart = (e) => {
-      setTouchStart({
-        x: e.touches[0].clientX,
-        y: e.touches[0].clientY,
-      });
+      setTouchStart({ x: e.touches[0].clientX, y: e.touches[0].clientY });
     };
 
     const handleTouchMove = (e) => {
-      setTouchEnd({
-        x: e.touches[0].clientX,
-        y: e.touches[0].clientY,
-      });
+      setTouchEnd({ x: e.touches[0].clientX, y: e.touches[0].clientY });
     };
 
     const handleTouchEnd = () => {
@@ -111,20 +95,19 @@ function ProductList() {
       setTouchEnd(null);
     };
 
-    // Добавляем слушатели с passive: true — для плавности на мобильных
-    modal.addEventListener("touchstart", handleTouchStart, { passive: true });
-    modal.addEventListener("touchmove", handleTouchMove, { passive: true });
-    modal.addEventListener("touchend", handleTouchEnd, { passive: true });
+    // ✅ ВАЖНО: СЛУШАТЕЛИ НА .modal-overlay, а не на .modal-content
+    modalOverlay.addEventListener("touchstart", handleTouchStart, { passive: true });
+    modalOverlay.addEventListener("touchmove", handleTouchMove, { passive: true });
+    modalOverlay.addEventListener("touchend", handleTouchEnd, { passive: true });
 
-    // Очистка
     return () => {
-      modal.removeEventListener("touchstart", handleTouchStart);
-      modal.removeEventListener("touchmove", handleTouchMove);
-      modal.removeEventListener("touchend", handleTouchEnd);
+      modalOverlay.removeEventListener("touchstart", handleTouchStart);
+      modalOverlay.removeEventListener("touchmove", handleTouchMove);
+      modalOverlay.removeEventListener("touchend", handleTouchEnd);
     };
-  }, []); // ✅ ПУСТОЙ МАССИВ — слушатели вешаются ОДИН РАЗ
+  }, []); // ✅ ПУСТОЙ МАССИВ — только один раз
 
-  // Запрет прокрутки страницы при открытии модалки
+  // Запрет прокрутки
   useEffect(() => {
     if (selectedProject) {
       document.body.classList.add("modal-open");
@@ -135,7 +118,7 @@ function ProductList() {
 
   return (
     <>
-      {/* Основной список продуктов */}
+      {/* Основной список */}
       <section className="product-list">
         <button className="product-list__back-btn" onClick={() => navigate(-1)}>
           ← Назад
@@ -150,15 +133,11 @@ function ProductList() {
                 key={item.id}
                 className="product-list__card"
                 onClick={() => handleImageClick(item)}
-                tabIndex={0} // ✅ Для клавиатурной навигации
+                tabIndex={0}
                 aria-label={`Открыть ${item.name}`}
               >
                 <div className="product-list__card-image">
-                  <img
-                    src={item.images[0]}
-                    alt={item.name}
-                    loading="lazy" // ✅ Ленивая загрузка
-                  />
+                  <img src={item.images[0]} alt={item.name} loading="lazy" />
                 </div>
                 <div className="product-list__card-content">
                   <h3 className="product-list__card-title">{item.name}</h3>
@@ -170,24 +149,23 @@ function ProductList() {
         </div>
       </section>
 
-      {/* Модальное окно — отображается только при selectedProject */}
+      {/* 🔥 ИСПРАВЛЕНИЕ: СВАЙП ЛОВИТСЯ НА .modal-overlay, а не на .modal-content */}
       {selectedProject && (
         <div
           className="modal-overlay"
           onClick={closeModal}
           aria-hidden="true"
+          style={{ cursor: "pointer" }} // ✅ КЛЮЧЕВОЕ: ЭТОТ ЭЛЕМЕНТ ЛОВИТ СВАЙПЫ — ДОЛЖЕН БЫТЬ ИНТЕРАКТИВНЫМ
         >
           <div
             className="modal-content"
             ref={modalContentRef}
             onClick={(e) => e.stopPropagation()} // Не закрывать при клике внутри
-            style={{ cursor: "pointer" }} // ✅ Критично для iOS свайпов!
             role="dialog"
             aria-modal="true"
             aria-labelledby="modal-title"
             aria-describedby="modal-description"
           >
-            {/* Закрыть кнопка */}
             <button
               className="modal-close"
               onClick={closeModal}
@@ -196,7 +174,6 @@ function ProductList() {
               ×
             </button>
 
-            {/* Кнопка "Назад" */}
             <button
               className="modal-nav-btn modal-nav-btn--prev"
               onClick={(e) => {
@@ -209,17 +186,14 @@ function ProductList() {
               ←
             </button>
 
-            {/* Изображение */}
             <img
               src={selectedProject.images[currentImageIndex]}
               alt={`${selectedProject.name} - фото ${currentImageIndex + 1}`}
               className="modal-image"
-              onClick={(e) => e.stopPropagation()}
               loading="lazy"
               id="modal-title"
             />
 
-            {/* Кнопка "Вперёд" */}
             <button
               className="modal-nav-btn modal-nav-btn--next"
               onClick={(e) => {
@@ -232,7 +206,6 @@ function ProductList() {
               →
             </button>
 
-            {/* Индикатор */}
             <div className="modal-indicator" id="modal-description">
               {currentImageIndex + 1} / {selectedProject.images.length}
             </div>
