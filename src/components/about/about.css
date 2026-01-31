@@ -6,19 +6,18 @@
   position: relative;
 
 
- /*  height: 1050px; */
+
 }
 
 .about__overlay {
   width: 100%;
-  min-height: 100vh;
   display: flex;
   align-items: center;
 }
 
 .about__content {
   margin: 0 10px;
-  max-width: 700px;
+  max-width: 900px;
   padding: 0px 24px;
   color: #522919;
   margin-bottom: 950px;
