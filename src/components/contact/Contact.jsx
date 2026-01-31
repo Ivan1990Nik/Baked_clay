@@ -16,7 +16,7 @@ function Contact() {
 
             <div className="contact__items">
               <a href="https://t.me/YanaYan4" className="contact__item">📱 Telegram</a>
-              <a href="https://t.me/Baked_clay_of_Yana" className="contact__item">💬 Telegram группа</a>
+              <a href="https://t.me/Yana_s_decor" className="contact__item">💬 Telegram группа</a>
               <a href="https://max.ru/u/f9LHodD0cOL0lVjrp8-JMNXao1V4zR3iwTJjnHxs42IqU-dRYZMlWO87S6Q" className="contact__item">💬 max</a>
             </div>
           </div>
