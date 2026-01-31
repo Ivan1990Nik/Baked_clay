@@ -15,14 +15,6 @@ function ProductList() {
 
   const MIN_SWIPE_DISTANCE = 40; // Уменьшено для лучшей отзывчивости
 
-  const isSwipe = () => {
-    if (!touchStart || !touchEnd) return false;
-    const distanceX = touchStart.x - touchEnd.x;
-    const distanceY = touchStart.y - touchEnd.y;
-    // Горизонтальный свайп + минимальное вертикальное смещение
-    return Math.abs(distanceX) > MIN_SWIPE_DISTANCE && Math.abs(distanceY) < 30;
-  };
-
 
   
 
@@ -89,24 +81,31 @@ function ProductList() {
     });
   };
 
-const handleTouchEnd = () => {
-  if (!touchStart || !touchEnd) return;
+const handleTouchEnd = (e) => {
+  if (!touchStart) return;
 
-  const distanceY = touchStart.y - touchEnd.y;
-  const distanceX = touchStart.x - touchEnd.x;
+  const end = touchEnd || {
+    x: e?.changedTouches?.[0]?.clientX || touchStart.x,
+    y: e?.changedTouches?.[0]?.clientY || touchStart.y,
+  };
 
-  // Закрыть по свайпу вниз, если свайп вертикальный и сильный
-  if (distanceY > 100 && Math.abs(distanceX) < 50) {
+  const distanceX = touchStart.x - end.x;
+  const deltaY = end.y - touchStart.y; // 👈 ВНИМАНИЕ: end - start — теперь логично!
+
+  // ✅ ЗАКРЫВАЕМ ПРИ СВАЙПЕ ВНИЗ (на 100px+)
+  if (deltaY > 100 && Math.abs(distanceX) < 50) {
     closeModal();
+    setTouchStart(null);
+    setTouchEnd(null);
     return;
   }
 
-  // Горизонтальный свайп — переключение
-  if (Math.abs(distanceX) > 30 && Math.abs(distanceY) < 50) {
+  // ✅ ПЕРЕКЛЮЧАЕМ ИЗОБРАЖЕНИЯ ПРИ ГОРИЗОНТАЛЬНОМ СВАЙПЕ
+  if (Math.abs(distanceX) > 30 && Math.abs(deltaY) < 50) {
     if (distanceX > 0) {
-      nextImage();
+      nextImage(); // Палец двигался влево → следующее фото
     } else {
-      prevImage();
+      prevImage(); // Палец двигался вправо → предыдущее фото
     }
   }
 
