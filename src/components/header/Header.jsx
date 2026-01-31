@@ -2,8 +2,8 @@
 import { useState } from "react";
 import "./header.css";
 
-import logo from "../../../public/images/logo3.png"
-import logo4 from "../../../public/images/logo4.png"
+import logo from "/images/logo3.png"
+import logo4 from "/images/logo4.png"
 import sticHeader from "/images/stic-header.png"
 
 export default function Header() {
