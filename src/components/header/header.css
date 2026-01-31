@@ -42,10 +42,20 @@ align-items: center;
 }
 
 .header__main__title {
- 
+  color: #522919;
   font-family: "Dancing Script", cursive;
   font-weight: 900;
   font-size: 25px;
+    background: linear-gradient(90deg, #522919, #D2691E);
+  background-size: 200% 100%; /* Для анимации */
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transition: background-position 0.5s;
+}
+
+.header__main__title:hover {
+  background-position: 100% 0;
 }
 
 /* ===== LOGO ===== */
@@ -128,7 +138,8 @@ margin-left: 280px;
   }
 
 .header__main__title {
-  font-size: 18px;
+  font-size: 20px;
+ 
 }
 
   .nav--open {
