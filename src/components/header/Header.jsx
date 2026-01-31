@@ -3,6 +3,7 @@ import { useState } from "react";
 import "./header.css";
 
 import logo from "../../../public/images/logo3.png"
+import logo4 from "../../../public/images/logo4.png"
 import sticHeader from "/images/stic-header.png"
 
 export default function Header() {
@@ -14,7 +15,7 @@ export default function Header() {
       <div className="header__container">
 
         <div className="header__logo">
-          <img src={logo} alt="" style={{ width: 230, height: 70 }} />
+          <img src={logo} alt="logo" style={{ width: 230, height: 70 }} />
         </div>
 
         <nav className={`nav ${isOpen ? "nav--open" : ""}`}>
@@ -33,10 +34,11 @@ export default function Header() {
         </div>
       </div>
       <div className="header__main">
-        
-        <img src={sticHeader} alt="" className="header__main_img"/>
-<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo rem recusandae suscipit dolorum consequatur amet 
-  v</p>
+        <img src={sticHeader} alt="logo" className="header__main__img"  />
+        <div className="header__main__item">
+          <img src={logo4} alt=""  />
+          <p className="header__main__title" >«Здесь глина превращается в настроение, а кружки — в маленькие истории»</p>
+        </div>
       </div>
     </header>
   );

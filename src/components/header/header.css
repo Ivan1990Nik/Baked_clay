@@ -22,14 +22,32 @@ z-index: 1000;
  padding: 100px 25px 0 ;
  max-width: 750px;
  margin: 0px 10px;
-      
+align-items: center;
 
 }
-.header__main_img{
-        
-        
+.header__main__item {
+ width: 100%;
 
 }
+.header__main__img {
+   max-width: 55%;
+
+}
+.header__main__item img{
+  border-radius: 150px;
+  max-width: 100%;        
+  height: auto;          
+  display: block;         
+  margin: 0 auto;   
+}
+
+.header__main__title {
+ 
+  font-family: "Dancing Script", cursive;
+  font-weight: 900;
+  font-size: 25px;
+}
+
 /* ===== LOGO ===== */
 .header__logo {
   margin-top: 10px;
@@ -108,11 +126,11 @@ margin-left: 280px;
   .nav a{
  color:#1eb2df;;
   }
-.header__main_img{
-        
-        height: 300px;
 
+.header__main__title {
+  font-size: 18px;
 }
+
   .nav--open {
     right: -10px;
     /* top: 0; */
